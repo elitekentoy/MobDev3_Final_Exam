@@ -14,39 +14,39 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<RemoveTask>(onRemoveTask);
   }
 
-  void onAddTask(AddTask event, Emitter<TasksState> emit){
+  void onAddTask(AddTask event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(TasksState(
       taskList: List.from(state.taskList)..add(event.task),
     ));
   }
 
-  void onUpdateTask(UpdateTask event, Emitter<TasksState> emit){
+  void onUpdateTask(UpdateTask event, Emitter<TasksState> emit) {
     final state = this.state;
     final task = event.task;
     final int index = state.taskList.indexOf(task);
 
-
     List<Task> taskList = List.from(state.taskList)..remove(task);
     task.isDone == false
-    ? taskList.insert(index, task.copyWith(isDone: true))
-    : taskList.insert(index, task.copyWith(isDone: false));
+        ? taskList.insert(index, task.copyWith(isDone: true))
+        : taskList.insert(index, task.copyWith(isDone: false));
 
     emit(TasksState(taskList: taskList));
   }
 
-  void onRemoveTask(RemoveTask event, Emitter<TasksState> emit){
+  void onRemoveTask(RemoveTask event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(TasksState(
-      taskList: List.from(state.taskList)..add(event.task),
-    ));
+        taskList: List.from(state.taskList)..add(event.task),
+        removedTaskList: List.from(state.removedTaskList)
+          ..add(event.task.copyWith(isDeleted: true))));
   }
-  
+
   @override
   TasksState? fromJson(Map<String, dynamic> json) {
     return TasksState.fromMap(json);
   }
-  
+
   @override
   Map<String, dynamic>? toJson(TasksState state) {
     return state.toMap();
