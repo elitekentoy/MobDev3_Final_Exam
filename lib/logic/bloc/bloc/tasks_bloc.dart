@@ -9,6 +9,7 @@ part 'tasks_state.dart';
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
   TasksBloc() : super(const TasksState()) {
     on<AddTask>(onAddTask);
+    on<UpdateTask>(onUpdateTask);
   }
 
   void onAddTask(AddTask event, Emitter<TasksState> emit){
