@@ -51,7 +51,7 @@ class RecycleBinScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  TasksList(tasksList: removedTasks),
+                  TasksList(tasksList: state.removedTaskList),
                 ],
               ),
             ));
