@@ -1,4 +1,6 @@
+import 'package:bloc_finals_exam/logic/bloc/bloc/tasks_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../models/task.dart';
 
@@ -94,6 +96,7 @@ class _AddEditTaskState extends State<AddEditTask> {
                             title: _title,
                             description: _description,
                           );
+                          context.read<TasksBloc>().add(AddTask(task: newTask));
                           Navigator.pop(context);
                         }
                       : null,
