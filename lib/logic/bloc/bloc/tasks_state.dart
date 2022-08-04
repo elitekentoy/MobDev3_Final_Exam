@@ -9,7 +9,7 @@ class TasksState extends Equatable {
   const TasksState({this.taskList = const <Task>[], this.removedTaskList = const <Task>[]});
 
   @override
-  List<Object> get props => [taskList];
+  List<Object> get props => [taskList, removedTaskList];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
