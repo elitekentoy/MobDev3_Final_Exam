@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../logic/bloc/bloc/tasks_bloc.dart';
+import '../models/task.dart';
 import '../test_data.dart';
 import '../widgets/tasks_list.dart';
 
@@ -14,14 +17,22 @@ class PendingTasksScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Chip(
-              label: Text(
-                '${TestData.pendingTasks.length} Pending | ${TestData.completedTasks.length} Completed',
-              ),
+            child: BlocBuilder<TasksBloc, TasksState>(
+              builder: (context, state) {
+                return Chip(
+                  label: Text(
+                    '${state.taskList.length} Pending | ${TestData.completedTasks.length} Completed',
+                  ),
+                );
+              },
             ),
           ),
           const SizedBox(height: 10),
-          TasksList(tasksList: TestData.pendingTasks),
+          BlocBuilder<TasksBloc, TasksState>(
+            builder: (context, state) {
+              return TasksList(tasksList: state.taskList);
+            },
+          ),
         ],
       ),
     );
