@@ -8,8 +8,14 @@ part 'tasks_state.dart';
 
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
   TasksBloc() : super(TasksInitial()) {
-    on<TasksEvent>((event, emit) {
-      // TODO: implement event handler
+    on<AddTask>((onAddTask, emit) {
     });
+  }
+
+  void onAddTask(AddTask event, Emitter<TasksState> emit){
+    final state = this.state;
+    emit(TasksState(
+      taskList: List.from(state.taskList)..add(event.task),
+    ));
   }
 }
