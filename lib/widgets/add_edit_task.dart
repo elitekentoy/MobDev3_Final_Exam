@@ -90,6 +90,10 @@ class _AddEditTaskState extends State<AddEditTask> {
                 ElevatedButton(
                   onPressed: _title.isNotEmpty && _description.isNotEmpty
                       ? () {
+                          var newTask = Task(
+                            title: _title,
+                            description: _description,
+                          );
                           Navigator.pop(context);
                         }
                       : null,
