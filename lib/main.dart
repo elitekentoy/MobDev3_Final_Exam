@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TasksBloc>(
-      create: (_) => TasksBloc()..add(AddTask(task: Task(title: 'First Title', description: 'First Description'))),
+      create: (_) => TasksBloc(),
       child: MaterialApp(
         title: 'BloC Tasks App',
         theme: AppThemes.appThemeData[AppTheme.lightMode],
