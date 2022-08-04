@@ -13,9 +13,7 @@ void main() async  {
   WidgetsFlutterBinding.ensureInitialized();
 
   final storage = HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
-  // runApp(
-  //   HydratedBlocOverrides.runZoned(() => MyApp(appRouter: AppRouter()), storage: await storage),
-  // );
+
   HydratedBlocOverrides.runZoned(
   () => runApp(MyApp(appRouter: AppRouter(),)),
   storage: await storage,
