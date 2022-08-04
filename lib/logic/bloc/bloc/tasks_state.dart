@@ -12,4 +12,3 @@ class TasksState extends Equatable {
   List<Object> get props => [taskList];
 }
 
-class TasksInitial extends TasksState {}
