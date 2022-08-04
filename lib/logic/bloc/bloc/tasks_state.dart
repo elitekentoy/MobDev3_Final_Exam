@@ -9,7 +9,7 @@ class TasksState extends Equatable {
   );
   
   @override
-  List<Object> get props => [];
+  List<Object> get props => [taskList];
 }
 
 class TasksInitial extends TasksState {}
