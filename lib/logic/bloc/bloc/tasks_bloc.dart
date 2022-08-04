@@ -9,6 +9,7 @@ part 'tasks_state.dart';
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
   TasksBloc() : super(const TasksState()) {
     on<AddTask>(onAddTask);
+    on<UpdateTask>(onUpdateTask);
   }
 
   void onAddTask(AddTask event, Emitter<TasksState> emit){
@@ -16,5 +17,19 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     emit(TasksState(
       taskList: List.from(state.taskList)..add(event.task),
     ));
+  }
+
+  void onUpdateTask(UpdateTask event, Emitter<TasksState> emit){
+    final state = this.state;
+    final task = event.task;
+    final int index = state.taskList.indexOf(task);
+
+
+    List<Task> taskList = List.from(state.taskList)..remove(task);
+    task.isDone == false
+    ? taskList.insert(index, task.copyWith(isDone: true))
+    : taskList.insert(index, task.copyWith(isDone: false));
+
+    emit(TasksState(taskList: taskList));
   }
 }
