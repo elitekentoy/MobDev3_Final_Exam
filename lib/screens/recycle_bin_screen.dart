@@ -47,7 +47,7 @@ class RecycleBinScreen extends StatelessWidget {
                 children: [
                   Center(
                     child: Chip(
-                      label: Text('${removedTasks.length} Tasks'),
+                      label: Text('${state.removedTaskList.length} Tasks'),
                     ),
                   ),
                   const SizedBox(height: 10),
