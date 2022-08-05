@@ -1,3 +1,4 @@
+import 'package:bloc_finals_exam/logic/bloc/switch_bloc/switch_bloc.dart';
 import 'package:bloc_finals_exam/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,8 +29,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TasksBloc>(
-      create: (_) => TasksBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => TasksBloc()),
+        BlocProvider(create: (context) => SwitchBloc()),
+      ],
       child: MaterialApp(
         title: 'BloC Tasks App',
         theme: AppThemes.appThemeData[AppTheme.lightMode],
