@@ -10,16 +10,18 @@ import 'app_themes.dart';
 import 'logic/bloc/tasks_bloc/tasks_bloc.dart';
 import 'screens/tabs_screen.dart';
 
-void main() async  {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final storage = HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
+  final storage = HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
 
   HydratedBlocOverrides.runZoned(
-  () => runApp(MyApp(appRouter: AppRouter(),)),
-  storage: await storage,
-);
-
+    () => runApp(MyApp(
+      appRouter: AppRouter(),
+    )),
+    storage: await storage,
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,11 +36,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => TasksBloc()),
         BlocProvider(create: (context) => SwitchBloc()),
       ],
-      child: MaterialApp(
-        title: 'BloC Tasks App',
-        theme: AppThemes.appThemeData[AppTheme.lightMode],
-        home: const TabsScreen(),
-        onGenerateRoute: appRouter.onGenerateRoute,
+      child: BlocBuilder<SwitchBloc, SwitchState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'BloC Tasks App',
+            theme: state.switchValue
+                ? AppThemes.appThemeData[AppTheme.darkMode]
+                : AppThemes.appThemeData[AppTheme.lightMode],
+            home: const TabsScreen(),
+            onGenerateRoute: appRouter.onGenerateRoute,
+          );
+        },
       ),
     );
   }
