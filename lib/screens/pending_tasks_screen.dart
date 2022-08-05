@@ -22,7 +22,7 @@ class PendingTasksScreen extends StatelessWidget {
               builder: (context, state) {
                 return Chip(
                   label: Text(
-                    '${state.taskList.length} Pending | ${TestData.completedTasks.length} Completed',
+                    '${state.pendingTaskList.length} Pending | ${TestData.completedTasks.length} Completed',
                   ),
                 );
               },
@@ -31,7 +31,7 @@ class PendingTasksScreen extends StatelessWidget {
           const SizedBox(height: 10),
           BlocBuilder<TasksBloc, TasksState>(
             builder: (context, state) {
-              return TasksList(tasksList: state.taskList);
+              return TasksList(tasksList: state.pendingTaskList);
             },
           ),
         ],
