@@ -1,14 +1,19 @@
-import 'package:bloc_finals_exam/logic/bloc/bloc/tasks_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../logic/bloc/tasks_bloc/tasks_bloc.dart';
 import '../screens/recycle_bin_screen.dart';
 import '../screens/tabs_screen.dart';
 import '../test_data.dart';
 
-class TasksDrawer extends StatelessWidget {
+class TasksDrawer extends StatefulWidget {
   const TasksDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<TasksDrawer> createState() => _TasksDrawerState();
+}
+
+class _TasksDrawerState extends State<TasksDrawer> {
   _switchToDarkTheme(BuildContext context, bool isDarkTheme) {
     if (isDarkTheme) {
     } else {}
