@@ -17,29 +17,46 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
 
   void onAddTask(AddTask event, Emitter<TasksState> emit) {
     final state = this.state;
-    emit(TasksState(
-        taskList: List.from(state.taskList)..add(event.task),
-        removedTaskList: state.removedTaskList));
+    emit(
+      TasksState(
+        pendingTaskList: List.from(state.pendingTaskList)..add(event.task),
+        removedTaskList: state.removedTaskList,
+        favoriteTaskList: state.favoriteTaskList,
+        completedTaskList: state.completedTaskList,
+      ),
+    );
   }
 
   void onUpdateTask(UpdateTask event, Emitter<TasksState> emit) {
     final state = this.state;
     final task = event.task;
-    final int index = state.taskList.indexOf(task);
 
-    List<Task> taskList = List.from(state.taskList)..remove(task);
+    List<Task> pendingTaskList = state.pendingTaskList;
+    List<Task> completedTaskList = state.completedTaskList;
     task.isDone == false
-        ? taskList.insert(index, task.copyWith(isDone: true))
-        : taskList.insert(index, task.copyWith(isDone: false));
+        ? {
+            pendingTaskList = List.from(pendingTaskList)..remove(task),
+            completedTaskList = List.from(completedTaskList)
+              ..insert(0, task.copyWith(isDone: true)),
+          }
+        : {
+            completedTaskList = List.from(completedTaskList)..remove(task),
+            pendingTaskList = List.from(pendingTaskList)
+              ..insert(0, task.copyWith(isDone: false)),
+          };
 
-    emit(
-        TasksState(taskList: taskList, removedTaskList: state.removedTaskList));
+    emit(TasksState(
+        pendingTaskList: pendingTaskList,
+        removedTaskList: state.removedTaskList,
+        completedTaskList: completedTaskList,
+        favoriteTaskList: state.favoriteTaskList,
+        ));
   }
 
   void onRemoveTask(RemoveTask event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(TasksState(
-        taskList: List.from(state.taskList)..remove(event.task),
+        pendingTaskList: List.from(state.pendingTaskList)..remove(event.task),
         removedTaskList: List.from(state.removedTaskList)
           ..add(event.task.copyWith(isDeleted: true))));
   }
@@ -48,7 +65,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     final state = this.state;
     emit(
       TasksState(
-          taskList: state.taskList,
+          pendingTaskList: state.pendingTaskList,
           removedTaskList: List.from(state.removedTaskList)
             ..remove(event.task)),
     );
