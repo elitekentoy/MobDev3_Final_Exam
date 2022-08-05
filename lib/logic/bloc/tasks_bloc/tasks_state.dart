@@ -5,8 +5,15 @@ part of 'tasks_bloc.dart';
 class TasksState extends Equatable {
   final List<Task> pendingTaskList;
   final List<Task> removedTaskList;
+  final List<Task> favoriteTaskList;
+  final List<Task> completedTaskList;
 
-  const TasksState({this.pendingTaskList = const <Task>[], this.removedTaskList = const <Task>[]});
+  const TasksState({
+    this.pendingTaskList = const <Task>[],
+    this.removedTaskList = const <Task>[],
+    this.favoriteTaskList = const <Task>[],
+    this.completedTaskList = const <Task>[],
+  });
 
   @override
   List<Object> get props => [pendingTaskList, removedTaskList];
@@ -20,8 +27,10 @@ class TasksState extends Equatable {
 
   factory TasksState.fromMap(Map<String, dynamic> map) {
     return TasksState(
-      pendingTaskList: List<Task>.from(map['pendingTaskList']?.map((x) => Task.fromMap(x))),
-      removedTaskList: List<Task>.from(map['removedTaskList']?.map((x) => Task.fromMap(x))),
+      pendingTaskList:
+          List<Task>.from(map['pendingTaskList']?.map((x) => Task.fromMap(x))),
+      removedTaskList:
+          List<Task>.from(map['removedTaskList']?.map((x) => Task.fromMap(x))),
     );
   }
 }
