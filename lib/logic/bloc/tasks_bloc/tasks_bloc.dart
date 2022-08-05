@@ -46,11 +46,11 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
           };
 
     emit(TasksState(
-        pendingTaskList: pendingTaskList,
-        removedTaskList: state.removedTaskList,
-        completedTaskList: completedTaskList,
-        favoriteTaskList: state.favoriteTaskList,
-        ));
+      pendingTaskList: pendingTaskList,
+      removedTaskList: state.removedTaskList,
+      completedTaskList: completedTaskList,
+      favoriteTaskList: state.favoriteTaskList,
+    ));
   }
 
   void onRemoveTask(RemoveTask event, Emitter<TasksState> emit) {
@@ -65,9 +65,11 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     final state = this.state;
     emit(
       TasksState(
-          pendingTaskList: state.pendingTaskList,
-          removedTaskList: List.from(state.removedTaskList)
-            ..remove(event.task)),
+        pendingTaskList: state.pendingTaskList,
+        removedTaskList: List.from(state.removedTaskList)..remove(event.task),
+        completedTaskList: state.completedTaskList,
+        favoriteTaskList: state.favoriteTaskList
+      ),
     );
   }
 
