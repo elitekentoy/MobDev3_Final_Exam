@@ -1,4 +1,6 @@
+import 'package:bloc_finals_exam/logic/bloc/bloc/tasks_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../screens/recycle_bin_screen.dart';
 import '../screens/tabs_screen.dart';
@@ -38,14 +40,18 @@ class TasksDrawer extends StatelessWidget {
               ),
             ),
             const Divider(),
-            ListTile(
-              leading: const Icon(Icons.delete),
-              title: const Text('Recycle Bin'),
-              trailing: Text('${TestData.removedTasks.length}'),
-              onTap: () => Navigator.pushReplacementNamed(
-                context,
-                RecycleBinScreen.path,
-              ),
+            BlocBuilder<TasksBloc, TasksState>(
+              builder: (context, state) {
+                return ListTile(
+                  leading: const Icon(Icons.delete),
+                  title: const Text('Recycle Bin'),
+                  trailing: Text('${TestData.removedTasks.length}'),
+                  onTap: () => Navigator.pushReplacementNamed(
+                    context,
+                    RecycleBinScreen.path,
+                  ),
+                );
+              },
             ),
             const Divider(),
             const Expanded(child: SizedBox()),
