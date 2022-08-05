@@ -6,9 +6,14 @@ import '../models/task.dart';
 import '../test_data.dart';
 import '../widgets/tasks_list.dart';
 
-class CompletedTasksScreen extends StatelessWidget {
+class CompletedTasksScreen extends StatefulWidget {
   const CompletedTasksScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CompletedTasksScreen> createState() => _CompletedTasksScreenState();
+}
+
+class _CompletedTasksScreenState extends State<CompletedTasksScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
