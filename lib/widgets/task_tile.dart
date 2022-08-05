@@ -83,7 +83,9 @@ class TaskTile extends StatelessWidget {
                 Navigator.pop(context);
                 _editTask(context);
               },
-              likeOrDislikeCallback: () {},
+              likeOrDislikeCallback: () {
+                context.read<TasksBloc>().add(MarkFavoriteOrUnfavoriteTask(task: task));
+              },
               cancelOrDeleteCallback: () {
                 _removeOrDeleteTask(context, task);
               },

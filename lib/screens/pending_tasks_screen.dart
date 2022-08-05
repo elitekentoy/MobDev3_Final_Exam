@@ -7,9 +7,14 @@ import '../models/task.dart';
 import '../test_data.dart';
 import '../widgets/tasks_list.dart';
 
-class PendingTasksScreen extends StatelessWidget {
+class PendingTasksScreen extends StatefulWidget {
   const PendingTasksScreen({Key? key}) : super(key: key);
 
+  @override
+  State<PendingTasksScreen> createState() => _PendingTasksScreenState();
+}
+
+class _PendingTasksScreenState extends State<PendingTasksScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(

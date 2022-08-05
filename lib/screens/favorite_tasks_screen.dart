@@ -6,9 +6,14 @@ import '../models/task.dart';
 import '../test_data.dart';
 import '../widgets/tasks_list.dart';
 
-class FavoriteTasksScreen extends StatelessWidget {
+class FavoriteTasksScreen extends StatefulWidget {
   const FavoriteTasksScreen({Key? key}) : super(key: key);
 
+  @override
+  State<FavoriteTasksScreen> createState() => _FavoriteTasksScreenState();
+}
+
+class _FavoriteTasksScreenState extends State<FavoriteTasksScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
