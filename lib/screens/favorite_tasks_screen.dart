@@ -11,9 +11,9 @@ class FavoriteTasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Task> tasksList = TestData.favoriteTasks;
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
+        List<Task> tasksList = state.favoriteTaskList;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Column(
