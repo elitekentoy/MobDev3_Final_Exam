@@ -45,7 +45,7 @@ class TasksDrawer extends StatelessWidget {
                 return ListTile(
                   leading: const Icon(Icons.delete),
                   title: const Text('Recycle Bin'),
-                  trailing: Text('${TestData.removedTasks.length}'),
+                  trailing: Text('${state.removedTaskList.length}'),
                   onTap: () => Navigator.pushReplacementNamed(
                     context,
                     RecycleBinScreen.path,
