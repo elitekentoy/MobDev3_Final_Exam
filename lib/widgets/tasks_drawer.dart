@@ -37,16 +37,20 @@ class _TasksDrawerState extends State<TasksDrawer> {
                 style: Theme.of(context).textTheme.headline5,
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.folder_special),
-              title: const Text('My Tasks'),
-              trailing: Text(
-                '${TestData.pendingTasks.length} | ${TestData.completedTasks.length}',
-              ),
-              onTap: () => Navigator.pushReplacementNamed(
-                context,
-                TabsScreen.path,
-              ),
+            BlocBuilder<TasksBloc, TasksState>(
+              builder: (context, state) {
+                return ListTile(
+                  leading: const Icon(Icons.folder_special),
+                  title: const Text('My Tasks'),
+                  trailing: Text(
+                    '${state.pendingTaskList.length} | ${state.completedTaskList.length}',
+                  ),
+                  onTap: () => Navigator.pushReplacementNamed(
+                    context,
+                    TabsScreen.path,
+                  ),
+                );
+              },
             ),
             const Divider(),
             BlocBuilder<TasksBloc, TasksState>(
@@ -73,9 +77,9 @@ class _TasksDrawerState extends State<TasksDrawer> {
                       _switchToDarkTheme(context, newValue);
                     },
                   ),
-                  title: state.switchValue 
-                    ? const Text('Switch to Light Mode')
-                    : const Text('Switch to Dark Mode'),
+                  title: state.switchValue
+                      ? const Text('Switch to Light Mode')
+                      : const Text('Switch to Dark Mode'),
                 );
               },
             ),
