@@ -16,7 +16,7 @@ class TasksState extends Equatable {
   });
 
   @override
-  List<Object> get props => [pendingTaskList, removedTaskList];
+  List<Object> get props => [pendingTaskList, removedTaskList, favoriteTaskList, completedTaskList];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
