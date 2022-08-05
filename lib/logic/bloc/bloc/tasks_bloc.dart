@@ -43,7 +43,10 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
           ..add(event.task.copyWith(isDeleted: true))));
   }
 
-  void onDeleteTask(DeleteTask event, Emitter<TasksState> emit){}
+  void onDeleteTask(DeleteTask event, Emitter<TasksState> emit) {
+    final state = this.state;
+    emit(TasksState(taskList: List.from(state.taskList)..remove(event.task)));
+  }
 
   @override
   TasksState? fromJson(Map<String, dynamic> json) {
