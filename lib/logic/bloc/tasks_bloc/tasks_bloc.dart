@@ -85,7 +85,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     List<Task> completedTaskList = state.completedTaskList;
     List<Task> favoriteTaskList = state.favoriteTaskList;
 
-    if(event.task.isDeleted == false){
+    if(event.task.isDone == false){
       if(event.task.isFavorite == false){
         var taskIndex = pendingTasksList.indexOf(event.task);
         pendingTasksList = List.from(pendingTasksList)
