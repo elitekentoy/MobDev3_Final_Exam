@@ -78,7 +78,18 @@ class TaskTile extends StatelessWidget {
                 _editTask(context);
               },
               likeOrDislikeCallback: () {},
-              cancelOrDeleteCallback: () {},
+              cancelOrDeleteCallback: () {
+                // Task toBeDeletedTask = Task(
+                //   id: task.id,
+                //   title: task.title,
+                //   description: task.description,
+                //   createdAt: task.createdAt,
+                //   isDone: task.isDone,
+                //   isDeleted: !task.isDeleted!,
+                //   isFavorite: task.isFavorite
+                // );
+                context.read<TasksBloc>().add(DeleteTask(task: task));
+              },
               restoreTaskCallback: () => {},
             ),
           ],
