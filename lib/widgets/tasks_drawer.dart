@@ -1,3 +1,4 @@
+import 'package:bloc_finals_exam/logic/bloc/switch_bloc/switch_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -60,13 +61,22 @@ class _TasksDrawerState extends State<TasksDrawer> {
             ),
             const Divider(),
             const Expanded(child: SizedBox()),
-            ListTile(
-              leading: Switch(
-                value: TestData.isDarkTheme,
-                onChanged: (newValue) => _switchToDarkTheme(context, newValue),
-              ),
-              title: const Text('Switch to Dark Theme'),
-              onTap: () => _switchToDarkTheme(context, !TestData.isDarkTheme),
+            BlocBuilder<SwitchBloc, SwitchState>(
+              builder: (context, state) {
+                return ListTile(
+                  leading: Switch(
+                    value: TestData.isDarkTheme,
+                    onChanged: (newValue) {
+                      newValue
+                        ? context.read<SwitchBloc>().add(SwitchOnEvent())
+                        : context.read<SwitchBloc>().add(SwitchOffEvent());
+                    },
+                  ),
+                  title: const Text('Switch to Dark Theme'),
+                  onTap: () =>
+                      _switchToDarkTheme(context, !TestData.isDarkTheme),
+                );
+              },
             ),
             const SizedBox(height: 10),
           ],
