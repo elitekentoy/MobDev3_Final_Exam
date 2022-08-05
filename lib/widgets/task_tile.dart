@@ -27,6 +27,12 @@ class TaskTile extends StatelessWidget {
     );
   }
 
+  void _removeOrDeleteTask(BuildContext ctx, Task task){
+    task.isDeleted! == true ?
+      ctx.read<TasksBloc>().add(DeleteTask(task: task)):
+      ctx.read<TasksBloc>().add(RemoveTask(task: task));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -78,7 +84,9 @@ class TaskTile extends StatelessWidget {
                 _editTask(context);
               },
               likeOrDislikeCallback: () {},
-              cancelOrDeleteCallback: () {},
+              cancelOrDeleteCallback: () {
+                _removeOrDeleteTask(context, task);
+              },
               restoreTaskCallback: () => {},
             ),
           ],
