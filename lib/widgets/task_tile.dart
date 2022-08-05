@@ -28,8 +28,8 @@ class TaskTile extends StatelessWidget {
   }
 
   void _removeOrDeleteTask(BuildContext ctx, Task task){
-    task.isDeleted! ?
-      ctx.read<TasksBloc>().add(DeleteTask(task: task)) :
+    task.isDeleted! == true ?
+      ctx.read<TasksBloc>().add(DeleteTask(task: task)):
       ctx.read<TasksBloc>().add(RemoveTask(task: task));
   }
 
@@ -85,16 +85,7 @@ class TaskTile extends StatelessWidget {
               },
               likeOrDislikeCallback: () {},
               cancelOrDeleteCallback: () {
-                // Task toBeDeletedTask = Task(
-                //   id: task.id,
-                //   title: task.title,
-                //   description: task.description,
-                //   createdAt: task.createdAt,
-                //   isDone: task.isDone,
-                //   isDeleted: !task.isDeleted!,
-                //   isFavorite: task.isFavorite
-                // );
-                context.read<TasksBloc>().add(DeleteTask(task: task));
+                _removeOrDeleteTask(context, task);
               },
               restoreTaskCallback: () => {},
             ),
