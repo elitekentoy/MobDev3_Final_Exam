@@ -33,7 +33,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
         ? taskList.insert(index, task.copyWith(isDone: true))
         : taskList.insert(index, task.copyWith(isDone: false));
 
-    emit(TasksState(taskList: taskList));
+    emit(TasksState(taskList: taskList, removedTaskList: state.removedTaskList));
   }
 
   void onRemoveTask(RemoveTask event, Emitter<TasksState> emit) {
