@@ -103,6 +103,8 @@ class _AddEditTaskState extends State<AddEditTask> {
                         var newTask = Task(
                           title: _title,
                           description: _description,
+                          isFavorite: widget.task!.isFavorite,
+                          isDone: widget.task!.isDone,
                         );
                         context.read<TasksBloc>().add(EditTask(oldTask: widget.task!, newTask: newTask));
                         Navigator.pop(context);
