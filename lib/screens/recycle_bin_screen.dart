@@ -33,7 +33,9 @@ class RecycleBinScreen extends StatelessWidget {
                         icon: const Icon(Icons.delete_forever),
                         label: const Text('Delete all tasks'),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        context.read<TasksBloc>().add(DeleteAllTask());
+                      },
                     ),
                   ],
                 ),
