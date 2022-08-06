@@ -13,7 +13,7 @@ class TaskTile extends StatelessWidget {
   final Task task;
 
   _editTask(BuildContext context) {
-    showModalBottomSheet(
+    return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) => SingleChildScrollView(
