@@ -59,6 +59,9 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
       } else {
         //removes the old state and insert it agaiin
         var taskIndex = favoriteTaskList.indexOf(task);
+        favoriteTaskList = List.from(favoriteTaskList)
+          ..remove(task)
+          ..insert(taskIndex, task.copyWith(isDone: false));
 
         //removes from the completedTaskList
         completedTaskList = List.from(completedTaskList)..remove(task);
@@ -66,10 +69,6 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
         //insert in pendingTaskLiist
         pendingTaskList = List.from(pendingTaskList)
           ..insert(0, task.copyWith(isDone: false));
-
-        favoriteTaskList = List.from(favoriteTaskList)
-          ..remove(task)
-          ..insert(taskIndex, task.copyWith(isDone: false));
       }
     }
 
